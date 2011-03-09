@@ -4,6 +4,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
+import org.apache.log4j.Logger;
+
 import com.espertech.esper.client.Configuration;
 import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.EPServiceProviderManager;
@@ -16,6 +18,8 @@ public class MightyEsper {
 
 	private static MightyEsper instance = new MightyEsper();
 	private final EPServiceProvider esperEngine;
+
+	static final Logger LOGGER = Logger.getLogger(MightyEsper.class);
 
 	private MightyEsper() {
 		Configuration config = new Configuration();
@@ -41,10 +45,11 @@ public class MightyEsper {
 
 			private void printMapBean(Map bean) {
 				Set<Map.Entry> keyValue = bean.entrySet();
+				StringBuffer sb = new StringBuffer(500);
 				for (Entry property : keyValue) {
-					System.out.printf("\t" + property.getKey() + "  :  " + property.getValue() + "\t");
+					sb.append(property.getKey() + "  :  " + property.getValue() + ", \t");
 				}
-				System.out.println("\n");
+				LOGGER.info(sb.toString());
 			}
 		});
 

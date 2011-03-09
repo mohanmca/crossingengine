@@ -3,10 +3,15 @@ package com.indigo.nte.order;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.apache.log4j.Logger;
+
 public class OrderGenerator {
 	private Random random;
 	AtomicInteger counter = new AtomicInteger();
 	private static OrderGenerator instance = new OrderGenerator();
+	
+	private static final Logger LOGGER = Logger.getLogger(OrderGenerator.class);
+	
 
 	OrderGenerator() {
 		random = new Random();
@@ -41,7 +46,7 @@ public class OrderGenerator {
 	public static void main(String... args) {
 		OrderGenerator ordgen = OrderGenerator.getInstance();
 		for (int i = 0; i < 50; i++) {
-			System.out.println(ordgen.getNext().toString());
+			LOGGER.debug(ordgen.getNext().toString());
 		}
 	}
 }
